@@ -1,0 +1,621 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopSphere | Inventory Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f6fb;
+            color: #252a40;
+        }
+
+        header {
+            background: #292f50;
+            color: white;
+            padding: 22px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 23px;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            background: #5367e8;
+            padding: 10px 15px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        main {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .subtitle {
+            color: #777d91;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            margin: 28px 0;
+        }
+
+        .summary-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px #00000008;
+            border-left: 4px solid #5367e8;
+        }
+
+        .summary-card p {
+            color: #777d91;
+            font-size: 14px;
+        }
+
+        .summary-card h2 {
+            font-size: 30px;
+            margin-top: 12px;
+        }
+
+        .summary-card.low {
+            border-left-color: #f0a52b;
+        }
+
+        .summary-card.out {
+            border-left-color: #e24a4a;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin: 25px 0 15px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar input,
+        .toolbar select {
+            padding: 11px;
+            border: 1px solid #d9dce8;
+            border-radius: 7px;
+            background: white;
+        }
+
+        .toolbar input {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        button {
+            border: none;
+            border-radius: 7px;
+            padding: 11px 15px;
+            background: #5367e8;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 18px #00000008;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 850px;
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0f1f6;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f9faff;
+            color: #656b80;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 9px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .in-stock {
+            color: #16803c;
+            background: #e7f7ec;
+        }
+
+        .low-stock {
+            color: #946200;
+            background: #fff3d2;
+        }
+
+        .out-stock {
+            color: #b42318;
+            background: #fde9e7;
+        }
+
+        .stock-cell {
+            font-weight: bold;
+        }
+
+        .stock-editor {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 190px;
+        }
+
+        .stock-editor input {
+            width: 75px;
+            min-width: 0;
+            padding: 8px;
+            border: 1px solid #d9dce8;
+            border-radius: 6px;
+        }
+
+        .stock-editor button {
+            padding: 8px 10px;
+        }
+
+        .update-btn {
+            background: #16803c;
+            white-space: nowrap;
+        }
+
+        #message {
+            margin: 15px 0;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
+
+        .error {
+            color: #b42318;
+        }
+
+        .info {
+            color: #16803c;
+        }
+
+        .note {
+            margin-top: 18px;
+            padding: 14px;
+            background: #eef1ff;
+            color: #424b86;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            color: #888;
+            padding: 25px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 850px) {
+            .summary {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            main {
+                width: 94%;
+                margin-top: 22px;
+            }
+
+            .summary {
+                gap: 10px;
+            }
+
+            .summary-card {
+                padding: 15px;
+            }
+
+            .summary-card h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ShopSphere Admin</h1>
+    <a href="index.html">← Back to Store</a>
+</header>
+
+<main>
+    <h2>Inventory Dashboard</h2>
+    <p class="subtitle">
+        Monitor product availability and manage stock across your marketplace.
+    </p>
+
+    <section class="summary">
+        <div class="summary-card">
+            <p>Total Products</p>
+            <h2 id="total-products">—</h2>
+        </div>
+
+        <div class="summary-card">
+            <p>Total Available Units</p>
+            <h2 id="total-stock">—</h2>
+        </div>
+
+        <div class="summary-card low">
+            <p>Low Stock Products</p>
+            <h2 id="low-stock-count">—</h2>
+        </div>
+
+        <div class="summary-card out">
+            <p>Out of Stock</p>
+            <h2 id="out-stock-count">—</h2>
+        </div>
+    </section>
+
+    <div class="toolbar">
+        <input
+            id="search"
+            type="search"
+            placeholder="Search product or vendor..."
+            aria-label="Search product or vendor"
+        >
+
+        <select id="stock-filter" aria-label="Filter by stock status">
+            <option value="all">All Products</option>
+            <option value="in">In Stock</option>
+            <option value="low">Low Stock (1–5)</option>
+            <option value="out">Out of Stock</option>
+        </select>
+
+        <button id="refresh-btn" onclick="loadInventory()">
+            Refresh Inventory
+        </button>
+    </div>
+
+    <p id="message" aria-live="polite">Loading inventory...</p>
+
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Vendor</th>
+                    <th>Price</th>
+                    <th>Current Stock</th>
+                    <th>Status</th>
+                    <th>Manage Stock</th>
+                </tr>
+            </thead>
+
+            <tbody id="inventory-body">
+                <tr>
+                    <td colspan="6">Loading products...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="note">
+        <strong>Inventory management:</strong>
+        Enter a new stock quantity and click Update. The backend saves
+        the new quantity to MongoDB Atlas. Stock must be a whole number
+        greater than or equal to zero.
+        <br><br>
+        <strong>Demo security:</strong>
+        This dashboard does not have admin authentication. Add
+        authentication and authorization before public deployment.
+    </div>
+</main>
+
+<footer>
+    ShopSphere Inventory Management · Demo Admin Dashboard
+</footer>
+
+<script>
+    const API_URL = "http://localhost:5000/api/products";
+
+    let inventory = [];
+    const updatingProducts = new Set();
+
+    function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, character => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        })[character]);
+    }
+
+    function getStatus(stock) {
+        if (stock <= 0) {
+            return {
+                label: "Out of Stock",
+                className: "out-stock",
+                filter: "out"
+            };
+        }
+
+        if (stock <= 5) {
+            return {
+                label: "Low Stock",
+                className: "low-stock",
+                filter: "low"
+            };
+        }
+
+        return {
+            label: "In Stock",
+            className: "in-stock",
+            filter: "in"
+        };
+    }
+
+    async function readResponse(response) {
+        const text = await response.text();
+
+        try {
+            return text ? JSON.parse(text) : {};
+        } catch {
+            throw new Error(
+                `API returned HTML/text instead of JSON. ` +
+                `HTTP ${response.status}. Response: ${text.slice(0, 160)}`
+            );
+        }
+    }
+
+    async function loadInventory() {
+        const message = document.getElementById("message");
+        const refreshButton = document.getElementById("refresh-btn");
+
+        refreshButton.disabled = true;
+        message.className = "";
+        message.textContent = "Loading latest inventory...";
+
+        try {
+            const response = await fetch(API_URL);
+            const data = await readResponse(response);
+
+            if (!response.ok) {
+                throw new Error(data.message || "Unable to fetch products.");
+            }
+
+            if (!Array.isArray(data)) {
+                throw new Error("Unexpected product data from backend.");
+            }
+
+            inventory = data;
+            updateSummary();
+            renderInventory();
+
+            message.className = "info";
+            message.textContent =
+                "Inventory loaded successfully. Last refreshed: " +
+                new Date().toLocaleTimeString();
+
+        } catch (error) {
+            console.error("Inventory load failed:", error);
+            message.className = "error";
+            message.textContent = error.message;
+        } finally {
+            refreshButton.disabled = false;
+        }
+    }
+
+    function updateSummary() {
+        const totalStock = inventory.reduce(
+            (sum, product) => sum + Math.max(0, Number(product.stock) || 0),
+            0
+        );
+
+        const lowStock = inventory.filter(product => {
+            const stock = Number(product.stock) || 0;
+            return stock > 0 && stock <= 5;
+        }).length;
+
+        const outOfStock = inventory.filter(product => {
+            return (Number(product.stock) || 0) <= 0;
+        }).length;
+
+        document.getElementById("total-products").textContent = inventory.length;
+        document.getElementById("total-stock").textContent = totalStock;
+        document.getElementById("low-stock-count").textContent = lowStock;
+        document.getElementById("out-stock-count").textContent = outOfStock;
+    }
+
+    function renderInventory() {
+        const searchTerm =
+            document.getElementById("search").value.trim().toLowerCase();
+
+        const filter = document.getElementById("stock-filter").value;
+        const tbody = document.getElementById("inventory-body");
+
+        const filtered = inventory.filter(product => {
+            const name = String(product.name || "").toLowerCase();
+            const vendor = String(product.vendor || "").toLowerCase();
+            const status = getStatus(Number(product.stock) || 0);
+
+            return (
+                (name.includes(searchTerm) || vendor.includes(searchTerm)) &&
+                (filter === "all" || status.filter === filter)
+            );
+        });
+
+        if (filtered.length === 0) {
+            tbody.innerHTML =
+                '<tr><td colspan="6">No matching products found.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = filtered.map(product => {
+            const stock = Number(product.stock) || 0;
+            const status = getStatus(stock);
+            const id = String(product._id);
+            const busy = updatingProducts.has(id);
+
+            return `
+                <tr>
+                    <td>${escapeHTML(product.name)}</td>
+                    <td>${escapeHTML(product.vendor)}</td>
+                    <td>₹${(Number(product.price) || 0).toLocaleString("en-IN")}</td>
+                    <td class="stock-cell">${stock}</td>
+                    <td>
+                        <span class="status ${status.className}">
+                            ${status.label}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="stock-editor">
+                            <input
+                                id="stock-${escapeHTML(id)}"
+                                type="number"
+                                min="0"
+                                step="1"
+                                value="${stock}"
+                                aria-label="New stock for ${escapeHTML(product.name)}"
+                                ${busy ? "disabled" : ""}
+                            >
+                            <button
+                                class="update-btn"
+                                onclick="updateStock('${escapeHTML(id)}')"
+                                ${busy ? "disabled" : ""}
+                            >
+                                ${busy ? "Saving..." : "Update"}
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join("");
+    }
+
+    async function updateStock(id) {
+        const input = document.getElementById("stock-" + id);
+        const message = document.getElementById("message");
+
+        if (!input || updatingProducts.has(id)) {
+            return;
+        }
+
+        if (
+            input.value.trim() === "" ||
+            !Number.isSafeInteger(Number(input.value)) ||
+            Number(input.value) < 0
+        ) {
+            message.className = "error";
+            message.textContent =
+                "Enter a whole number greater than or equal to zero.";
+            input.focus();
+            return;
+        }
+
+        const newStock = Number(input.value);
+
+        updatingProducts.add(id);
+        renderInventory();
+
+        message.className = "";
+        message.textContent = "Updating stock...";
+
+        try {
+            const response = await fetch(
+                `${API_URL}/${encodeURIComponent(id)}/stock`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify({ stock: newStock })
+                }
+            );
+
+            const data = await readResponse(response);
+
+            if (!response.ok) {
+                throw new Error(
+                    data.message || `Stock update failed (HTTP ${response.status}).`
+                );
+            }
+
+            // Fetch the latest stock after the update succeeds.
+            const refreshResponse = await fetch(API_URL);
+            const latestProducts = await readResponse(refreshResponse);
+
+            if (!refreshResponse.ok || !Array.isArray(latestProducts)) {
+                throw new Error(
+                    "Stock update succeeded, but refreshing the dashboard failed. Click Refresh Inventory."
+                );
+            }
+
+            inventory = latestProducts;
+            updateSummary();
+            renderInventory();
+
+            message.className = "info";
+            message.textContent =
+                `${data.name} stock successfully updated to ${data.stock}.`;
+
+        } catch (error) {
+            console.error("Stock update failed:", error);
+            message.className = "error";
+            message.textContent = error.message;
+        } finally {
+            updatingProducts.delete(id);
+            renderInventory();
+        }
+    }
+
+    document.getElementById("search").addEventListener("input", renderInventory);
+    document.getElementById("stock-filter").addEventListener("change", renderInventory);
+
+    loadInventory();
+</script>
+
+</body>
+</html>

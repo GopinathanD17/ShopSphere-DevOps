@@ -7,11 +7,7 @@
     <title>ShopSphere | Everyday Marketplace</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: Arial, sans-serif;
@@ -28,11 +24,7 @@
             box-shadow: 0 2px 12px #00000008;
         }
 
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-            color: #5367e8;
-        }
+        .logo { font-size: 26px; font-weight: bold; color: #5367e8; }
 
         nav a {
             text-decoration: none;
@@ -55,15 +47,8 @@
             gap: 25px;
         }
 
-        .hero h1 {
-            font-size: clamp(32px, 4vw, 48px);
-            margin-bottom: 18px;
-        }
-
-        .hero p {
-            line-height: 1.8;
-            color: #e0e4ff;
-        }
+        .hero h1 { font-size: clamp(32px, 4vw, 48px); margin-bottom: 18px; }
+        .hero p { line-height: 1.8; color: #e0e4ff; }
 
         .hero button {
             margin-top: 22px;
@@ -82,14 +67,8 @@
             padding: 20px;
         }
 
-        .section {
-            width: 88%;
-            margin: 40px auto;
-        }
-
-        .section h2 {
-            margin-bottom: 22px;
-        }
+        .section { width: 88%; margin: 40px auto; }
+        .section h2 { margin-bottom: 22px; }
 
         .products {
             display: grid;
@@ -125,21 +104,9 @@
             display: block;
         }
 
-        .card h3 {
-            margin: 10px 0;
-            font-size: 16px;
-        }
-
-        .seller {
-            font-size: 12px;
-            color: #8c91a5;
-        }
-
-        .price {
-            font-size: 19px;
-            font-weight: bold;
-            margin: 15px 0;
-        }
+        .card h3 { margin: 10px 0; font-size: 16px; }
+        .seller { font-size: 12px; color: #8c91a5; }
+        .price { font-size: 19px; font-weight: bold; margin: 15px 0; }
 
         .card button {
             width: 100%;
@@ -151,8 +118,7 @@
             cursor: pointer;
         }
 
-        .card button:disabled,
-        .payment-btn:disabled {
+        .card button:disabled, .payment-btn:disabled {
             background: #999;
             cursor: not-allowed;
         }
@@ -204,11 +170,7 @@
             color: #555;
         }
 
-        .payment-amount {
-            font-size: 30px;
-            margin: 14px 0;
-            color: #292f50;
-        }
+        .payment-amount { font-size: 30px; margin: 14px 0; color: #292f50; }
 
         .demo-label {
             background: #fff2cc;
@@ -231,12 +193,7 @@
             place-items: center;
         }
 
-        .qr-pattern {
-            width: 100%;
-            height: 100%;
-            display: block;
-            shape-rendering: crispEdges;
-        }
+        .qr-pattern { width: 100%; height: 100%; display: block; shape-rendering: crispEdges; }
 
         .qr-note {
             font-size: 12px;
@@ -270,79 +227,30 @@
             cursor: pointer;
         }
 
-        .success {
-            color: #16803c;
-            margin-top: 18px;
-            line-height: 1.7;
-        }
-
-        .error-message {
-            color: #b42318;
-            margin-top: 15px;
-            line-height: 1.6;
-        }
+        .success { color: #16803c; margin-top: 18px; line-height: 1.7; }
+        .error-message { color: #b42318; margin-top: 15px; line-height: 1.6; }
 
         @media (max-width: 850px) {
-            .products {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-
-            .hero {
-                padding: 30px;
-            }
-
-            .hero-art {
-                font-size: 65px;
-            }
+            .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .hero { padding: 30px; }
+            .hero-art { font-size: 65px; }
         }
 
         @media (max-width: 500px) {
-            header {
-                padding: 18px 5%;
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            nav a {
-                margin-left: 8px;
-                font-size: 12px;
-            }
-
-            .hero {
-                width: 92%;
-                padding: 25px;
-            }
-
-            .hero-art {
-                display: none;
-            }
-
-            .section {
-                width: 92%;
-            }
-
-            .products {
-                gap: 10px;
-            }
-
-            .product-image {
-                height: 140px;
-            }
-
-            .card {
-                padding: 10px;
-            }
-
-            .qr-box {
-                width: 190px;
-                height: 190px;
-            }
+            header { padding: 18px 5%; flex-wrap: wrap; gap: 12px; }
+            nav a { margin-left: 8px; font-size: 12px; }
+            .hero { width: 92%; padding: 25px; }
+            .hero-art { display: none; }
+            .section { width: 92%; }
+            .products { gap: 10px; }
+            .product-image { height: 140px; }
+            .card { padding: 10px; }
+            .qr-box { width: 190px; height: 190px; }
         }
     </style>
 </head>
 
 <body>
-
 <header>
     <div class="logo">ShopSphere.</div>
     <nav>
@@ -375,49 +283,29 @@
     <div class="cart">
         <div id="cart-items">Your cart is empty.</div>
         <h3 id="cart-total" style="margin-top:15px">Total: ₹0</h3>
-
-        <button onclick="checkout()"
-            style="margin-top:15px;padding:12px 18px;background:#5367e8;color:white;border:0;border-radius:7px;cursor:pointer">
+        <button onclick="checkout()" style="margin-top:15px;padding:12px 18px;background:#5367e8;color:white;border:0;border-radius:7px;cursor:pointer">
             Continue to Checkout
         </button>
-
         <p style="font-size:12px;color:#888;margin-top:12px">
             Demo checkout only. No real payment is processed.
         </p>
     </div>
 </section>
 
-<div class="modal" id="payment-modal"
-    role="dialog" aria-modal="true" aria-labelledby="payment-title">
-
+<div class="modal" id="payment-modal" role="dialog" aria-modal="true" aria-labelledby="payment-title">
     <div class="modal-content">
-        <button class="close-btn" onclick="closePayment()" aria-label="Close">
-            &times;
-        </button>
-
+        <button class="close-btn" onclick="closePayment()" aria-label="Close">&times;</button>
         <h2 id="payment-title">ShopSphere Checkout</h2>
         <p style="margin-top:12px;color:#666">Demo UPI Payment</p>
-
         <div class="payment-amount" id="payment-amount">₹0</div>
-
         <div class="demo-label">DEMO ONLY · NOT A REAL UPI QR</div>
 
         <div class="qr-box">
-            <svg class="qr-pattern" viewBox="0 0 21 21"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img" aria-label="Decorative demo QR pattern">
-
+            <svg class="qr-pattern" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Decorative demo QR pattern">
                 <rect width="21" height="21" fill="white"/>
-
-                <path fill="black" fill-rule="evenodd"
-                    d="M0 0h7v7H0z M1.5 1.5v4h4v-4z M2.5 2.5h2v2h-2z"/>
-
-                <path fill="black" fill-rule="evenodd"
-                    d="M14 0h7v7h-7z M15.5 1.5v4h4v-4z M16.5 2.5h2v2h-2z"/>
-
-                <path fill="black" fill-rule="evenodd"
-                    d="M0 14h7v7H0z M1.5 15.5v4h4v-4z M2.5 16.5h2v2h-2z"/>
-
+                <path fill="black" fill-rule="evenodd" d="M0 0h7v7H0z M1.5 1.5v4h4v-4z M2.5 2.5h2v2h-2z"/>
+                <path fill="black" fill-rule="evenodd" d="M14 0h7v7h-7z M15.5 1.5v4h4v-4z M16.5 2.5h2v2h-2z"/>
+                <path fill="black" fill-rule="evenodd" d="M0 14h7v7H0z M1.5 15.5v4h4v-4z M2.5 16.5h2v2h-2z"/>
                 <path fill="black" d="
                     M8 1h1v1H8z M10 1h2v1h-2z
                     M8 3h2v1H8z M11 4h1v2h-1z
@@ -440,20 +328,10 @@
         <p style="font-size:13px;color:#666;line-height:1.6">
             This is a visual demo only. It cannot be scanned to transfer money.
         </p>
-
-        <div class="qr-note">
-            Decorative QR-style pattern — no payment data encoded.
-        </div>
-
-        <button class="payment-btn" id="simulate-btn" onclick="simulatePayment()">
-            Simulate Payment Success
-        </button>
-
+        <div class="qr-note">Decorative QR-style pattern — no payment data encoded.</div>
+        <button class="payment-btn" id="simulate-btn" onclick="simulatePayment()">Simulate Payment Success</button>
         <div id="payment-result" aria-live="polite"></div>
-
-        <button class="cancel-btn" onclick="closePayment()">
-            Cancel / Close
-        </button>
+        <button class="cancel-btn" onclick="closePayment()">Cancel / Close</button>
     </div>
 </div>
 
@@ -463,8 +341,12 @@
 </footer>
 
 <script>
-    const API_URL = "http://localhost:5000/api/products";
-    const API_BASE_URL = "http://localhost:5000/api";
+    // Go Live uses the backend directly. Docker/Nginx uses the /api proxy.
+    const API_BASE_URL = window.location.port === "8081"
+        ? "/api"
+        : "http://localhost:5000/api";
+
+    const API_URL = `${API_BASE_URL}/products`;
 
     let products = [];
     const cart = {};
@@ -473,7 +355,6 @@
 
     function getEmoji(name) {
         const text = name.toLowerCase();
-
         if (text.includes("headphone") || text.includes("earphone")) return "🎧";
         if (text.includes("watch")) return "⌚";
         if (text.includes("charger")) return "🔌";
@@ -485,61 +366,44 @@
         if (text.includes("keyboard")) return "⌨️";
         if (text.includes("mouse")) return "🖱️";
         if (text.includes("sunglasses")) return "🕶️";
-
         return "📦";
     }
 
     function escapeHTML(value) {
         return String(value ?? "").replace(/[&<>"']/g, character => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#39;"
+            "&": "&amp;", "<": "&lt;", ">": "&gt;",
+            '"': "&quot;", "'": "&#39;"
         })[character]);
     }
 
     async function loadProducts() {
         if (isLoadingProducts) return;
-
         isLoadingProducts = true;
 
         const status = document.getElementById("product-status");
         const list = document.getElementById("product-list");
 
         try {
-            const response = await fetch(API_URL, {
-                cache: "no-store"
-            });
+            const response = await fetch(API_URL, { cache: "no-store" });
 
-            if (!response.ok) {
-                throw new Error("API request failed");
-            }
+            if (!response.ok) throw new Error("API request failed");
 
             const data = await response.json();
-
-            if (!Array.isArray(data)) {
-                throw new Error("Invalid products response");
-            }
+            if (!Array.isArray(data)) throw new Error("Invalid products response");
 
             products = data;
             renderProducts();
             renderCart();
 
-            status.textContent = products.length
-                ? ""
-                : "No products available yet.";
-
+            status.textContent = products.length ? "" : "No products available yet.";
         } catch (error) {
             console.error("Products loading failed:", error);
 
             if (products.length === 0) {
-                status.textContent =
-                    "Unable to load products. Please check whether the backend is running.";
+                status.textContent = "Unable to load products. Please check whether the backend is running.";
                 list.innerHTML = "";
             } else {
-                status.textContent =
-                    "Unable to refresh products. Showing the last loaded data.";
+                status.textContent = "Unable to refresh products. Showing the last loaded data.";
             }
         } finally {
             isLoadingProducts = false;
@@ -547,50 +411,41 @@
     }
 
     function renderProducts() {
-        document.getElementById("product-list").innerHTML =
-            products.map(product => {
-                const id = escapeHTML(product._id);
-                const name = escapeHTML(product.name);
-                const vendor = escapeHTML(product.vendor);
-                const description = escapeHTML(product.description);
-                const image = product.image || "";
-                const emoji = getEmoji(product.name);
-                const price = Number(product.price);
-                const stock = Number(product.stock) || 0;
-                const cartQuantity = cart[product._id] || 0;
-                const cannotAdd = stock <= 0 || cartQuantity >= stock;
+        document.getElementById("product-list").innerHTML = products.map(product => {
+            const id = escapeHTML(product._id);
+            const name = escapeHTML(product.name);
+            const vendor = escapeHTML(product.vendor);
+            const description = escapeHTML(product.description);
+            const image = product.image || "";
+            const emoji = getEmoji(product.name);
+            const price = Number(product.price);
+            const stock = Number(product.stock) || 0;
+            const cartQuantity = cart[product._id] || 0;
+            const cannotAdd = stock <= 0 || cartQuantity >= stock;
 
-                const imageContent = image
-                    ? `<img src="${escapeHTML(image)}"
-                            alt="${name}"
-                            loading="lazy"
-                            onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
-                       ><span style="display:none">${emoji}</span>`
-                    : emoji;
+            const imageContent = image
+                ? `<img src="${escapeHTML(image)}" alt="${name}" loading="lazy"
+                        onerror="this.style.display='none';this.nextElementSibling.style.display='block'
+                   "><span style="display:none">${emoji}</span>`
+                : emoji;
 
-                return `
-                    <article class="card">
-                        <div class="product-image">${imageContent}</div>
-                        <div class="seller">${vendor}</div>
-                        <h3>${name}</h3>
-                        <div class="price">₹${price.toLocaleString("en-IN")}</div>
-                        <p style="font-size:12px;color:#777;margin-bottom:12px">
-                            ${description}
-                        </p>
-                        <p style="font-size:12px;color:#777;margin-bottom:12px">
-                            Stock: ${stock}
-                        </p>
-                        <button onclick="addToCart('${id}')" ${cannotAdd ? "disabled" : ""}>
-                            ${stock <= 0 ? "Out of Stock" :
-                              cartQuantity >= stock ? "Stock Limit Reached" : "+ Add to Bag"}
-                        </button>
-                    </article>`;
-            }).join("");
+            return `
+                <article class="card">
+                    <div class="product-image">${imageContent}</div>
+                    <div class="seller">${vendor}</div>
+                    <h3>${name}</h3>
+                    <div class="price">₹${price.toLocaleString("en-IN")}</div>
+                    <p style="font-size:12px;color:#777;margin-bottom:12px">${description}</p>
+                    <p style="font-size:12px;color:#777;margin-bottom:12px">Stock: ${stock}</p>
+                    <button onclick="addToCart('${id}')" ${cannotAdd ? "disabled" : ""}>
+                        ${stock <= 0 ? "Out of Stock" : cartQuantity >= stock ? "Stock Limit Reached" : "+ Add to Bag"}
+                    </button>
+                </article>`;
+        }).join("");
     }
 
     function addToCart(id) {
         const product = products.find(item => item._id === id);
-
         if (!product) return;
 
         const currentQuantity = cart[id] || 0;
@@ -608,10 +463,7 @@
 
     function renderCart() {
         const entries = Object.entries(cart);
-
-        const count = entries.reduce(
-            (sum, [, quantity]) => sum + quantity, 0
-        );
+        const count = entries.reduce((sum, [, quantity]) => sum + quantity, 0);
 
         const total = entries.reduce((sum, [id, quantity]) => {
             const product = products.find(item => item._id === id);
@@ -619,9 +471,7 @@
         }, 0);
 
         document.getElementById("cart-count").textContent = count;
-
-        document.getElementById("cart-total").textContent =
-            "Total: ₹" + total.toLocaleString("en-IN");
+        document.getElementById("cart-total").textContent = "Total: ₹" + total.toLocaleString("en-IN");
 
         document.getElementById("cart-items").innerHTML = entries.length
             ? entries.map(([id, quantity]) => {
@@ -629,14 +479,11 @@
                 if (!product) return "";
 
                 return `<p style="margin:10px 0">
-                    ${getEmoji(product.name)}
-                    ${escapeHTML(product.name)} × ${quantity}
+                    ${getEmoji(product.name)} ${escapeHTML(product.name)} × ${quantity}
                     — ₹${(Number(product.price) * quantity).toLocaleString("en-IN")}
-                    <button
-                        onclick="removeFromCart('${escapeHTML(id)}')"
+                    <button onclick="removeFromCart('${escapeHTML(id)}')"
                         style="margin-left:8px;padding:4px 8px"
-                        ${checkoutInProgress ? "disabled" : ""}
-                    >−</button>
+                        ${checkoutInProgress ? "disabled" : ""}>−</button>
                 </p>`;
             }).join("")
             : "Your cart is empty.";
@@ -645,11 +492,8 @@
     function removeFromCart(id) {
         if (checkoutInProgress) return;
 
-        if (cart[id] > 1) {
-            cart[id]--;
-        } else {
-            delete cart[id];
-        }
+        if (cart[id] > 1) cart[id]--;
+        else delete cart[id];
 
         renderCart();
         renderProducts();
@@ -666,15 +510,11 @@
             return product ? sum + Number(product.price) * quantity : sum;
         }, 0);
 
-        document.getElementById("payment-amount").textContent =
-            "₹" + total.toLocaleString("en-IN");
-
+        document.getElementById("payment-amount").textContent = "₹" + total.toLocaleString("en-IN");
         document.getElementById("payment-result").innerHTML = "";
         document.getElementById("simulate-btn").style.display = "block";
         document.getElementById("simulate-btn").disabled = false;
-        document.getElementById("simulate-btn").textContent =
-            "Simulate Payment Success";
-
+        document.getElementById("simulate-btn").textContent = "Simulate Payment Success";
         document.getElementById("payment-modal").style.display = "block";
     }
 
@@ -682,8 +522,7 @@
         if (checkoutInProgress) return;
 
         if (Object.keys(cart).length === 0) {
-            document.getElementById("payment-result").textContent =
-                "Your cart is empty.";
+            document.getElementById("payment-result").textContent = "Your cart is empty.";
             return;
         }
 
@@ -707,14 +546,10 @@
                 );
                 const data = await response.json();
 
-                if (!response.ok) {
-                    throw new Error(data.message || "Unable to check stock.");
-                }
+                if (!response.ok) throw new Error(data.message || "Unable to check stock.");
 
                 if (data.stock < quantity) {
-                    throw new Error(
-                        `${data.name}: only ${data.stock} item(s) are available.`
-                    );
+                    throw new Error(`${data.name}: only ${data.stock} item(s) are available.`);
                 }
             }
 
@@ -729,10 +564,7 @@
                 );
 
                 const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.message || "Purchase failed.");
-                }
+                if (!response.ok) throw new Error(data.message || "Purchase failed.");
 
                 deductedItems.push({ id, quantity });
             }
@@ -741,19 +573,14 @@
             renderCart();
 
             result.innerHTML =
-                '<div class="success">' +
-                    '<h3>✓ Demo Checkout Successful!</h3>' +
-                    '<p>No money was transferred.</p>' +
-                    '<p>Inventory has been updated.</p>' +
-                '</div>';
+                '<div class="success"><h3>✓ Demo Checkout Successful!</h3>' +
+                '<p>No money was transferred.</p><p>Inventory has been updated.</p></div>';
 
             button.style.display = "none";
-
             await loadProducts();
 
         } catch (error) {
             console.error("Demo checkout failed:", error);
-
             let restoreFailed = false;
 
             for (const item of [...deductedItems].reverse()) {
@@ -773,15 +600,12 @@
                 }
             }
 
-            result.innerHTML =
-                `<div class="error-message">
-                    <h3>Checkout could not complete</h3>
-                    <p>${escapeHTML(error.message)}</p>
-                    <p>Please review the current stock and try again.</p>
-                    ${restoreFailed
-                        ? "<p>Some stock may need manual review.</p>"
-                        : ""}
-                </div>`;
+            result.innerHTML = `<div class="error-message">
+                <h3>Checkout could not complete</h3>
+                <p>${escapeHTML(error.message)}</p>
+                <p>Please review the current stock and try again.</p>
+                ${restoreFailed ? "<p>Some stock may need manual review.</p>" : ""}
+            </div>`;
 
             await loadProducts();
 
@@ -802,20 +626,14 @@
     }
 
     document.getElementById("payment-modal").addEventListener("click", event => {
-        if (event.target.id === "payment-modal") {
-            closePayment();
-        }
+        if (event.target.id === "payment-modal") closePayment();
     });
 
-    // Load products when the page opens.
     loadProducts();
 
-    // Automatically refresh product data every 5 seconds.
-    // Prevent overlapping requests inside loadProducts().
     setInterval(() => {
         loadProducts();
     }, 5000);
 </script>
-
 </body>
 </html>

@@ -27,14 +27,40 @@ pipeline {
                 sh 'docker image inspect shopsphere-devops-frontend:latest'
             }
         }
+
+        stage('Deploy ShopSphere') {
+            steps {
+                sh '''
+                    set -e
+
+                    install -m 600 /etc/shopsphere/backend.env "$WORKSPACE/backend/.env"
+
+                    docker compose \
+                      -p shopsphere-devops \
+                      -f "$WORKSPACE/docker-compose.yml" \
+                      up -d --build --force-recreate
+                '''
+            }
+        }
+
+        stage('Verify Deployment') {
+            steps {
+                sh 'curl --fail --retry 5 --retry-delay 2 http://localhost:8081/api/health'
+            }
+        }
     }
 
     post {
-        success {
-            echo 'ShopSphere Docker image builds completed successfully!'
+        always {
+            sh 'rm -f "$WORKSPACE/backend/.env"'
         }
+
+        success {
+            echo 'ShopSphere CI/CD pipeline completed successfully!'
+        }
+
         failure {
-            echo 'Pipeline failed. Check the stage logs.'
+            echo 'Pipeline failed. Check Console Output.'
         }
     }
 }
